@@ -9,7 +9,7 @@
 [[4th Year/1st Term/GANs/Before Mid/1 - Introduction\|1 - Introduction]]
 [[4th Year/1st Term/GANs/Before Mid/2 - Background (Optional)\|2 - Background (Optional)]]
 [[4th Year/1st Term/GANs/Before Mid/3 - Autoregressive Models\|3 - Autoregressive Models]]
-
+[[4th Year/1st Term/GANs/Before Mid/4 - Autoencoders\|4 - Autoencoders]]
 ## Expanded Explanations
 
 [[4th Year/1st Term/GANs/Expanded Explanations/Lecture 3\|Lecture 3]]

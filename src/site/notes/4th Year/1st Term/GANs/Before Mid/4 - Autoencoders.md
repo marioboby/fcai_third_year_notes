@@ -72,7 +72,7 @@ The **Vanilla Autoencoder (AE)** is the foundational blueprint of self-supervise
         
           
         
-![Pasted image 20261020220801.png](/img/user/Pasted%20image%2020261020220801.png)
+![Pasted image 20261020220801.png](/img/user/imgs/Pasted%20image%2020261020220801.png)
 ### The Overcomplete Bottleneck Dilemma
 
 - What happens if we design a Vanilla Autoencoder where the hidden layer dimension is greater than or equal to the input layer dimension ($\text{dim}(z) \ge \text{dim}(x)$)?
@@ -145,7 +145,7 @@ To extract rich, high-dimensional representations—or simply to prevent an auto
         
     - Plotting $\text{KL}(\rho \parallel \hat{\rho})$ with $\rho = 0.2$ reveals a convex bowl that touches $0$ exactly at $\hat{\rho} = 0.2$, rising gently as $\hat{\rho} \rightarrow 0$ and shooting up asymptotically toward infinity as $\hat{\rho} \rightarrow 1.0$.
     <br>
-![Pasted image 20261021010234.png](/img/user/Pasted%20image%2020261021010234.png)
+![Pasted image 20261021010234.png](/img/user/imgs/Pasted%20image%2020261021010234.png)
     
     - **Total Loss Function:** The network is trained by minimizing the combined reconstruction and sparsity loss, weighted by a regularization hyperparameter $\lambda$ (or $\beta$):
         
