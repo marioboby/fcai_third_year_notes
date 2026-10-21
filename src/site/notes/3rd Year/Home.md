@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/3rd-year/home/","tags":["gardenEntry"],"dg-note-properties":{}}
+{"dg-publish":true,"permalink":"/3rd-year/home/","dg-note-properties":{}}
 ---
 
 

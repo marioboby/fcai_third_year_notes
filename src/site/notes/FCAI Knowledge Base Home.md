@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/fcai-knowledge-base-home/","dg-note-properties":{}}
+{"dg-publish":true,"permalink":"/fcai-knowledge-base-home/","tags":["gardenEntry"],"dg-note-properties":{}}
 ---
 
 # 3rd Year
