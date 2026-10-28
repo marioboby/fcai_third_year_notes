@@ -28,26 +28,30 @@
 	- [x] Lecture 1 - Introduction
 	- [x] Lecture 2 - Autoregressive Models
 	- [x] Lecture 3 - Autoencoders and VAEs
+	- [ ] Lecture 4 - GANs
 
 - [ ] [[4th Year/1st Term/Robotics/Home\|Robotics]]
 	- [x] Lecture 1 - Introduction
 	- [x] Lecture 2 - Fundamentals, Locomotion, Manipulation, and kinematics
-	- [ ] Lecture 3 - 
-	- [ ] Lecture 4 - Actuators
+	- [ ] Lecture 3 - Forward and inverse kinematics
+	- [ ] Lecture 4 - Robots Components, DOF, Actuators and Stability
 	- [ ] Lecture 5 - Sensors
+	- [ ] Lecture 6 - Signal processing and Fourier Transform
 
 - [ ] [[4th Year/1st Term/Unsupervised/Home\|Unsupervised]]
-	- [ ] Lecture 1 - Introduction
-	- [ ] Lecture 2 - 
-	- [ ] Lecture 3 - 
-	- [ ] Lecture 4 - 
+	- [ ] Lecture 1 - Introduction : Linear Algebra, ML, and Stats
+	- [ ] Lecture 2 - Descriptive Stats, Uncertainty in data, Gaussian Distribution
+	- [ ] Lecture 3 - Uncertainty in data (Cont.), Bayes' Theorem, Probabilistic models using MLEs
+	- [ ] Lecture 4 - Behind Logistic Regression, and Why Deep Learning 
 
 - [ ] [[4th Year/1st Term/BCI/Home\|BCI]]
 	- [x] Lecture 1 - Introduction
-	- [ ] Lecture 2 - 
-	- [ ] Lecture 3 - 
+	- [ ] Lecture 2 - Montage, Referencing, EGG input formatting
+	- [ ] Lecture 3 - Cosine and sine, EGG and Wave Slicing (mostly if not entirely code)
+	- [ ] Lecture 4 - Fourier Transform
 
 - [ ] [[4th Year/1st Term/Selected Topics/Home\|Selected Topics in AI]]
 	- [ ] Lecture 1 - Introduction to CNNs
 	- [ ] Lecture 2 - ResNet 
 	- [ ] Lecture 3 - DenseNet
+	- [ ] Lecture 4 - MobileNet

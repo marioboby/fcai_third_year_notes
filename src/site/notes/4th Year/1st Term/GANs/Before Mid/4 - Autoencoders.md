@@ -460,7 +460,7 @@ When dealing with complex, high-dimensional domains, a single hidden layer is of
         
     - Here, all weights in the first Encoder ($x \rightarrow a^1$) and first Decoder ($a^1 \rightarrow \hat{x}$) are active/trainable, allowing Hidden Layer 1 ($a_1^1, a_2^1, a_3^1, a_4^1$) to become the **feature extractor for the raw input data**.
    <br>
-   ![Pasted image 20261021205629.png](/img/user/Pasted%20image%2020261021205629.png)
+   ![Pasted image 20261021205629.png](/img/user/imgs/Pasted%20image%2020261021205629.png)
    
 - **Stage 2 — Learn $2^{nd}$ Level Features From $1^{st}$ Level Features (Unsupervised):**
     
@@ -471,7 +471,7 @@ When dealing with complex, high-dimensional domains, a single hidden layer is of
         
     - Train only the new second-level Encoder and Decoder weights so that Hidden Layer 2 ($a_1^2, a_2^2, a_3^2, a_4^2$) acts as the **feature extractor for the first feature extractor**.
     <br>
-    ![Pasted image 20261021205744.png](/img/user/Pasted%20image%2020261021205744.png)
+    ![Pasted image 20261021205744.png](/img/user/imgs/Pasted%20image%2020261021205744.png)
     
 - **Stage 3 & Stage 4 — Hierarchical Expansion (Unsupervised):**
     
