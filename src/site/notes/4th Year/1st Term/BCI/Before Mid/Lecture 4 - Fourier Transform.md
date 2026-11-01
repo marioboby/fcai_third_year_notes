@@ -444,7 +444,7 @@ When we work with digital signals on a computer, we do not have access to contin
         
           
         
-![Pasted image 20261101213919.png](/img/user/Pasted%20image%2020261101213919.png)
+![Pasted image 20261101213919.png](/img/user/imgs/Pasted%20image%2020261101213919.png)
 ### 4.2 Aliasing and Spectral Mirroring
 
 What happens if the physical signal oscillates _faster_ than the Nyquist limit ($f > f_s / 2$)? The discrete samples can no longer keep up with every peak and trough, triggering a deceptive phenomenon known as **aliasing**.
@@ -477,7 +477,7 @@ What happens if the physical signal oscillates _faster_ than the Nyquist limit (
             
               
             
-![Pasted image 20261101214031.png](/img/user/Pasted%20image%2020261101214031.png)
+![Pasted image 20261101214031.png](/img/user/imgs/Pasted%20image%2020261101214031.png)
 ## 5. Computational Implementation: Fourier From Scratch
 
 Let us bridge our theoretical equations with practical scientific computing in **MATLAB** and **Python (NumPy)**, examining how the forward transform, one-sided spectral scaling, and inverse reconstruction are implemented line by line.
@@ -526,9 +526,9 @@ for i in range(N):
     reconstructed += coeff[i] * np.exp(2j * np.pi * fr[i] * complex_sine_wave_t)
 ```
 
-  ![Pasted image 20261101212247.png](/img/user/Pasted%20image%2020261101212247.png)
+  ![Pasted image 20261101212247.png](/img/user/imgs/Pasted%20image%2020261101212247.png)
 
-![Pasted image 20261101212305.png](/img/user/Pasted%20image%2020261101212305.png)
+![Pasted image 20261101212305.png](/img/user/imgs/Pasted%20image%2020261101212305.png)
 
 - **Unpacking the Operational Workflow**:
     
@@ -868,7 +868,7 @@ for i in range(N):
 * **Strict Rule:** The sampling rate must strictly satisfy $f_s > 2 f_{\max}$ (or $f_{\max} < \frac{f_s}{2}$), otherwise frequencies above the Nyquist limit fold back (alias) into the lower spectrum.
 * **Why Strictly ($>$ and not $\ge$):** At exactly $f = \frac{f_s}{2}$, a sine wave's samples can land exclusively on zero-crossings ($\sin(\pi n) = 0$), causing the signal to vanish completely.
 
-![Pasted image 20261101231835.png](/img/user/Pasted%20image%2020261101231835.png)
+![Pasted image 20261101231835.png](/img/user/imgs/Pasted%20image%2020261101231835.png)
 
 ---
 
@@ -898,7 +898,7 @@ for i in range(N):
 > [!warning] Why You Cannot Fix Aliasing in Software After Sampling
 > Once sampled at $100\text{ Hz}$, the $60\text{ Hz}$ hum is mathematically indistinguishable from **real $40\text{ Hz}$ gamma-band brain activity**. Applying a digital filter at $40\text{ Hz}$ in Python would erase genuine $40\text{ Hz}$ neural data along with the noise.
 
-![Pasted image 20261101232107.png](/img/user/Pasted%20image%2020261101232107.png)
+![Pasted image 20261101232107.png](/img/user/imgs/Pasted%20image%2020261101232107.png)
 
 ---
 

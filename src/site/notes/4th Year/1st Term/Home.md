@@ -37,18 +37,20 @@
 	- [ ] Lecture 4 - Robots Components, DOF, Actuators and Stability
 	- [ ] Lecture 5 - Sensors
 	- [ ] Lecture 6 - Signal processing and Fourier Transform
+	- [ ] Lecture 7 - Locomotion
 
 - [ ] [[4th Year/1st Term/Unsupervised/Home\|Unsupervised]]
 	- [ ] Lecture 1 - Introduction : Linear Algebra, ML, and Stats
 	- [ ] Lecture 2 - Descriptive Stats, Uncertainty in data, Gaussian Distribution
 	- [ ] Lecture 3 - Uncertainty in data (Cont.), Bayes' Theorem, Probabilistic models using MLEs
 	- [ ] Lecture 4 - Behind Logistic Regression, and Why Deep Learning 
+	- [ ] Lecture 5 - Dimensionality Reduction, PCA, Autoencoders
 
-- [ ] [[4th Year/1st Term/BCI/Home\|BCI]]
+- [x] [[4th Year/1st Term/BCI/Home\|BCI]]
 	- [x] Lecture 1 - Introduction
-	- [ ] Lecture 2 - Montage, Referencing, EGG input formatting
-	- [ ] Lecture 3 - Cosine and sine, EGG and Wave Slicing (mostly if not entirely code)
-	- [ ] Lecture 4 - Fourier Transform
+	- [x] Lecture 2 - Montage, Referencing, EGG input formatting
+	- [x] Lecture 3 - Cosine and sine, EGG and Wave Slicing (mostly if not entirely code)
+	- [x] Lecture 4 - Fourier Transform
 
 - [ ] [[4th Year/1st Term/Selected Topics/Home\|Selected Topics in AI]]
 	- [ ] Lecture 1 - Introduction to CNNs
