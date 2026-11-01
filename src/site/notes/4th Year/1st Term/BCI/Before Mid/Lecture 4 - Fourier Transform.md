@@ -22,40 +22,33 @@ Welcome to one of the most elegant ideas in all of mathematics and engineering. 
     
       
     - To solve the heat equation, he demonstrated a radical proposition: any arbitrary temperature profile—and by extension, any complicated signal—can be expressed as a sum of simple sine and cosine waves that add up to the original waveform.
-        
-          
-        
+   <br>
     - **Decomposition and Reconstruction**: Rather than slicing a signal into short segments of time, Fourier's method pulls the signal apart into continuous **frequencies** (such as $0\text{ Hz}$, $1\text{ Hz}$, $2\text{ Hz}$, and $3\text{ Hz}$ components), each spanning the entire duration of the observation window. By adding these constituent waves back together one by one at every time point, the exact original waveform is recovered.
-        
-          
-        
+   <br>
     - **Analogy:** If thinking about the number $9$ as a monolithic entity is difficult, we can decompose it into simpler additive parts, such as $9 = 6 + 3$. Just as **Singular Value Decomposition (SVD)** factors a complex matrix into a sum of smaller, simpler rank-one matrices, the **Fourier Transform** breaks a complicated time-series signal into elementary sinusoidal waves (the "easy pieces") governed by linear addition (the "one rule that puts them back together").
         
           
         
+![Pasted image 20261029213358.png](/img/user/imgs/Pasted%20image%2020261029213358.png)
 
+![Pasted image 20261029213421.png](/img/user/imgs/Pasted%20image%2020261029213421.png)
 ### 1.2 Why Leave the Time Domain?
 
 - **Time Domain vs. Frequency Domain**: The **time domain** plots signal **amplitude** (vertical axis) against **time** in seconds (horizontal axis), showing how a system's state fluctuates moment by moment. Conversely, the **frequency domain** plots **magnitude** or **power** (vertical axis) against **frequency** in **Hertz ($\text{Hz}$)**—defined as cycles per second—revealing the rate of oscillation.
-    
-      
+<br>
     - **Dimensionality Compression**: A long, densely sampled time-domain signal containing hundreds or thousands of time points can often be summarized by just a few numbers (its dominant frequency spikes) in the frequency domain.
-        
-          
-        
+    <br>
     - **Unmasking Latent Features**: The time domain routinely hides overlapping processes that become immediately separable in the frequency domain, such as isolating two simultaneous human speakers in an audio recording or distinguishing between two distinct **EEG states** in a brain-computer interface.
-        
-          
-        
+  <br>
     - **Spectral Filtering**: By transforming a signal into the frequency domain, we can selectively retain desired waves, discard unwanted noise or artifacts, and invert the transform back to the time domain to produce a clean, filtered signal.
-        
-          
-        
+    <br>
     - **Case Study:** Consider a $1\text{-second}$ recording of an oscillating wave that swings between an amplitude of $-4$ and $+4$ while completing $2$ full cycles. In the time domain, you must track a continuously curving trajectory across the entire $1\text{-second}$ interval. In the frequency domain, this entire waveform collapses into a single, unmistakable spike of **magnitude** $4.0$ (or **power** $= \text{magnitude}^2 = 16$) located precisely at $f = 2.0\text{ Hz}$. If you change the oscillation rate $f$ or the wave's amplitude, that single spectral spike simply shifts horizontally or scales vertically to follow it.
         
           
         
+![Pasted image 20261029213333.png](/img/user/imgs/Pasted%20image%2020261029213333.png)
 
+![Pasted image 20261029233915.png](/img/user/imgs/Pasted%20image%2020261029233915.png)
 ## 2. Complex Geometry: Euler's Formula, Conjugates, and Helices
 
 To understand _how_ the Fourier Transform actually works under the hood, we must move beyond flat 2D sine waves on paper and embrace the geometry of the complex plane. In Fourier analysis, waves are not merely up-and-down squiggles; they are the shadows cast by spinning vectors.
@@ -74,26 +67,18 @@ To understand _how_ the Fourier Transform actually works under the hood, we must
     
       
     - **Geometric Interpretation**: In the complex plane—where the horizontal axis represents the **real part ($\text{Re} \cdot \cos$)** and the vertical axis represents the **imaginary part ($\text{Im} \cdot \sin$)**—the quantity $e^{i\theta}$ represents a unit vector rotated by angle $\theta$.
-        
-          
-        
+    <br>
     - **Orthogonal Shadows (Projections)**: The real component $\cos\theta$ is the vector's horizontal shadow on the real axis, while the imaginary component $\sin\theta$ is its vertical shadow on the imaginary axis.
-        
-          
-        
+    <br>
     - **Pythagorean Magnitude**: If you observe a stationary complex vector in the plane with horizontal projection $2$ and vertical projection $4$, its **magnitude** (the radius of its circle, or the hypotenuse of the right triangle) is given by the Euclidean norm: $\text{magnitude} = \sqrt{2^2 + 4^2} \approx 4.47$.
-        
-          
-        
+    <br>
     - **Time Evolution and Helices**: When we let the angle grow linearly with time according to $\theta = 2\pi f t$, the vector rotates **counter-clockwise** at a speed of $f$ turns per second. In a 3D space formed by the real axis, imaginary axis, and **time progression**, this spinning vector traces out a three-dimensional corkscrew or **helix**.
-        
-          
-        
+    <br>
     - **Example:** At a static angle of $\theta = 35^\circ$, the vector $e^{i\theta}$ sits in the first quadrant of the complex plane. If we instead drive a vector of length $3$ at frequency $f = 2\text{ Hz}$ over time—written in 3D as $3\cos(2\pi \cdot 2t) + i\,3\sin(2\pi \cdot 2t)$—its real shadow traces a cosine wave $3\cos(2\pi \cdot 2t)$ while its imaginary shadow traces a sine wave $3\sin(2\pi \cdot 2t)$.
         
           
         
-
+![Pasted image 20261029214730.png](/img/user/imgs/Pasted%20image%2020261029214730.png)
 ### 2.2 Complex Conjugates and the Physical Meaning of Negative Frequencies
 
 Students often ask: _"Professor, if physical signals like EEG voltages or sound waves are strictly real numbers, why do we build them out of imaginary numbers?"_ The answer lies in the symmetry of the **complex conjugate**.
@@ -110,9 +95,7 @@ Students often ask: _"Professor, if physical signals like EEG voltages or sound 
     
       
     - **Negative Frequency**: Geometrically, $e^{-i\theta}$ represents a vector at angle $-\theta$ that rotates in the opposite direction—**clockwise**—as time progresses. In the Fourier domain, a "negative frequency" is simply a vector spinning clockwise rather than counter-clockwise.
-        
-          
-        
+    <br>
     - **Synthesizing Real Waves from Complex Pairs**: When you add a counter-clockwise complex wave $e^{i\theta}$ and its clockwise conjugate twin $e^{-i\theta}$, their vertical imaginary parts ($+i\sin\theta$ and $-i\sin\theta$) perfectly cancel out at every instant in time, leaving a purely real value along the horizontal axis:
         
           
@@ -120,39 +103,78 @@ Students often ask: _"Professor, if physical signals like EEG voltages or sound 
         $$e^{i\theta} + e^{-i\theta} = 2\cos\theta \implies \cos\theta = \frac{1}{2}\left(e^{i\theta} + e^{-i\theta}\right)$$
         
         Thus, two complex helices spinning in opposite directions combine to form a single real-valued wave whose average lies strictly on the real axis.
+<br>
+    - **Example:** At $\theta = 35^\circ$, adding $e^{i 35^\circ}$ and $e^{-i 35^\circ}$ cancels their opposite vertical projections and yields a purely real vector of length $2\cos(35^\circ) = 1.64$ along the horizontal real axis. <mark style="background:#ff4d4f">Consequently, any real-valued cosine wave of amplitude $A$ at frequency $f$ splits its amplitude equally between two conjugate twins: half ($A/2$) at the positive frequency $+f$ and half ($A/2$) at the negative frequency $-f$.</mark>
         
           
-        
-    - **Example:** At $\theta = 35^\circ$, adding $e^{i 35^\circ}$ and $e^{-i 35^\circ}$ cancels their opposite vertical projections and yields a purely real vector of length $2\cos(35^\circ) = 1.64$ along the horizontal real axis. Consequently, any real-valued cosine wave of amplitude $A$ at frequency $f$ splits its amplitude equally between two conjugate twins: half ($A/2$) at the positive frequency $+f$ and half ($A/2$) at the negative frequency $-f$.
-        
-          
-        
+      
+> [!question] ايه معني الحتة ال highlighted دي
+> The key idea is that a real cosine wave can be represented as the sum of two complex waves, each contributing half of its amplitude. Let's see why.
+> 
+> ### 1. Start with a real cosine wave
+> Suppose we have a cosine wave with amplitude $A$ and frequency $f$:
+> $$x(t) = A\cos(2\pi f t)$$
+> 
+> Using Euler's formula,
+> $$\cos(\theta) = \frac{e^{i\theta} + e^{-i\theta}}{2}$$
+> 
+> we can rewrite the signal as:
+> $$x(t) = \frac{A}{2}e^{i 2\pi f t} + \frac{A}{2}e^{-i 2\pi f t}$$
+> 
+> Notice that both complex waves have a coefficient of $A/2$:
+> - **$+f$**: The wave rotating counterclockwise, $e^{i 2\pi f t}$.
+> - **$-f$**: The wave rotating clockwise, $e^{-i 2\pi f t}$.
+> 
+> ### 2. Why does each wave get half the amplitude?
+> Let's use a cosine wave with amplitude $A = 4$:
+> $$x(t) = 2e^{i 2\pi f t} + 2e^{-i 2\pi f t}$$
+> 
+> At $t = 0$, both complex exponentials equal $1$:
+> $$x(0) = 2(1) + 2(1) = 4$$
+> 
+> So the two components add up to the original amplitude of $4$.
+> 
+> At other times, their imaginary parts cancel each other, while their real parts add together:
+> $$\underbrace{\frac{A}{2}e^{i\theta}}_{\text{positive frequency}} + \underbrace{\frac{A}{2}e^{-i\theta}}_{\text{negative frequency}} = A\cos(\theta)$$
+> 
+> Each component has magnitude $A/2$, and together they produce the real cosine wave of amplitude $A$.
+> 
+> ### 3. Visual intuition
+> - **Positive frequency ($+f$):** $\frac{A}{2}e^{i\theta}$ $\rightarrow$ Counterclockwise rotation
+> - **Negative frequency ($-f$):** $\frac{A}{2}e^{-i\theta}$ $\rightarrow$ Clockwise rotation
+> - **Real cosine wave:** $A\cos(2\pi f t)$ $\rightarrow$ Imaginary parts cancel; real parts add.
+> 
+> ### 4. One important clarification
+> When we say the amplitude is split equally, we mean the Fourier representation assigns a coefficient of $A/2$ to each of the two frequency components under the usual two-sided Fourier convention.
+> 
+> It does not mean the physical signal loses half its amplitude, or that two separate physical waves must exist. The complex waves are a mathematical representation of one real signal.
+> 
+> **Remember:** A real-valued cosine wave has matching positive- and negative-frequency components. Their coefficients are complex conjugates, and for a cosine with zero phase, both coefficients are $A/2$.
+  
+![Pasted image 20261029215102.png](/img/user/imgs/Pasted%20image%2020261029215102.png)
 
+![Pasted image 20261029215134.png](/img/user/imgs/Pasted%20image%2020261029215134.png)
 ### 2.3 The Phase Trap & Initial Configuration
 
 - **The Sine-Wave Trap**: A naive intuition suggests we can build any signal solely out of standard sine waves ($\sin(2\pi f t)$). However, every pure sine wave starts at $0$ at time $t = 0$.
     
       
     - If all our constituent vectors started at angle $0$ (or if all waves started at amplitude $0$), their sum at the very first time point $t = 0$ would always be forced to equal $0$—yet real-world signals can start at any arbitrary value!
-        
-          
-        
+    <br>
     - **Initial Configuration**: To escape this trap, every frequency component must be endowed with a two-part **initial configuration** at $t = 0$:
         
           
         1. **Magnitude ($\vert{}c\vert{}$)**: The size (radius) of the circle traced by the spinning vector, which dictates "how much" of that frequency is present.
-            
-              
-            
+        <br>
         2. **Initial Phase ($\angle c$)**: The starting angle of the vector at $t = 0$, which dictates "where" in its cycle each wave begins.
-            
-              
-            
+      <br>
     - **Analogy:** Think of the Fourier synthesis of a signal like a synchronized clockwork mechanism made of multiple spinning arms linked tip-to-tail. Before you release the gears to spin at their respective speeds ($0\text{ Hz}, 1\text{ Hz}, 2\text{ Hz}, 3\text{ Hz}$), you must set both the _length_ of each arm (**magnitude**) and the _starting clock-hand angle_ of each arm (**initial phase**) so that their combined tip starts at the exact initial height of your signal at $t=0$.
         
           
         
+![Pasted image 20261029235716.png](/img/user/imgs/Pasted%20image%2020261029235716.png)
 
+![Pasted image 20261029235738.png](/img/user/imgs/Pasted%20image%2020261029235738.png)
 ## 3. Mathematical Mechanics of the Discrete Fourier Transform (DFT)
 
 Now we arrive at the central mathematical question of the lecture: Given a raw time-series signal $x(t)$, _how do we mathematically isolate each vector's initial configuration (magnitude and phase)?_
@@ -171,9 +193,7 @@ Now we arrive at the central mathematical question of the lecture: Given a raw t
         $$c \cdot e^{i 2\pi f t} \cdot e^{-i 2\pi f t} = c$$
         
     - The positive and negative rotations cancel each other out, stopping the vector dead in its tracks at its initial position $c$!
-        
-          
-        
+    <br>
 - **The Discrete Fourier Transform (DFT) Analysis Equation**: Across a discrete whole signal $x_n$ consisting of $N$ samples (where normalized time is $t_n = n/N$, running from $0$ to almost $1$, and discrete frequency index is $k = 0, 1, \dots, N-1$), we compute the $k$-th **Fourier coefficient** $c_k$ as:
     
       
@@ -181,40 +201,154 @@ Now we arrive at the central mathematical question of the lecture: Given a raw t
     $$c_k = \frac{1}{N} \sum_{n=0}^{N-1} x_n e^{-2\pi i k n / N}$$
     
     - **Dot Product as Similarity**: Multiplying every signal sample $x_n$ by the complex sine wave sample $e^{-2\pi i k n / N}$ and summing them together ($\text{row} \cdot \text{column}$) is a **dot product**—a mathematical measure of similarity between the signal and that test wave.
-        
-          
-        
+     <br>
     - **Why Divide by $N$? (Normalization)**: Whether we record a $2\text{ Hz}$ wave for $2\text{ seconds}$ or $4\text{ seconds}$, the physical strength of the $2\text{ Hz}$ component has not changed. Dividing the sum by the number of samples $N$ computes the **average** (center of mass), ensuring that the Fourier coefficient $c_k$ does not artificially grow with signal duration.
-        
-          
-        
+     <br>
     - **Resonance vs. Cancellation in the Complex Plane**:
         
           
         - **When Test Frequency $f$ IS in the Signal**: The stopped sample points all lean heavily to one side of the complex plane, so their average produces a non-zero complex vector $c_k$ pointing to the initial configuration.
-            
-              
-            
+        <br>
         - **When Test Frequency $f$ IS NOT in the Signal**: The sample products wrap symmetrically around the origin in closed loops and cancel each other out, averaging to $0$.
-            
-              
-            
+      <br>
     - **Extracting the Spectra**: Because each coefficient $c_k$ is a complex number ($c_k = \text{real} + i\,\text{imag}$), we extract two distinct spectra across all frequencies $c_0, c_1, c_2, \dots$:
         
           
         1. **Magnitude Spectrum (The Spectrum)**: Plotting $\vert{}c_k\vert{} = \sqrt{\text{real}^2 + \text{imag}^2}$ (computed via `abs(c)`) against frequency in $\text{Hz}$.
-            
-              
-            
+          <br>
         2. **Phase Spectrum**: Plotting $\angle c_k = \text{angle}(c_k)$ against frequency in $\text{Hz}$.
-            
-              
-            
+        <br>
     - **Example:** Suppose we test a composite signal at $f = 1.00\text{ Hz}$ and obtain the complex Fourier coefficient $c_1 = 0.50 + 1.00i$. Its magnitude is $\vert{}c_1\vert{} = \sqrt{0.5^2 + 1^2} = 1.12$, and its initial phase is $\angle c_1 = 63^\circ$. Because its conjugate twin at $-1\text{ Hz}$ carries the other half of the wave's energy, the true time-domain amplitude of the $1\text{ Hz}$ wave is $2\vert{}c_1\vert{} = 2.24$. Similarly, testing the same signal at $f = 2.00\text{ Hz}$ yields $c_2 = 2.00 + 0.00i$ ($\vert{}c_2\vert{} = 2.00$, $\text{phase} = 0^\circ$), which corresponds to a $4\cos(2\pi \cdot 2t)$ wave split between $+2\text{ Hz}$ and $-2\text{ Hz}$, whereas testing at $f = 3\text{ Hz}$ (which is absent from the signal) causes the points to loop around the origin and cancel to $0$.
         
           
         
+> [!question] خلينا نوضح الحتة دي بمثال
+> # Calculating a Fourier Coefficient Step-by-Step
+> 
+> Suppose we have a cosine signal with:
+> 
+>   
+> 
+> - Amplitude $A = 4$
+>     
+>       
+>     
+> - Frequency $f = 2\text{ Hz}$
+>     
+>       
+>     
+> 
+> Therefore:
+> 
+>   
+> 
+> $$x(t) = 4\cos(4\pi t)$$
+> 
+> We want to calculate its Fourier coefficient at $2\text{ Hz}$.
+> 
+>   
+> 
+> ## 1. Apply the Fourier Transform
+> 
+> We multiply the signal by the opposite rotating wave:
+> 
+>   
+> 
+> $$c_2 = \frac{1}{T}\int_0^T x(t)e^{-i4\pi t}\,dt$$
+> 
+> Substitute our signal:
+> 
+>   
+> 
+> $$c_2 = \frac{1}{T}\int_0^T 4\cos(4\pi t)e^{-i4\pi t}\,dt$$
+> 
+> Using Euler's formula:
+> 
+>   
+> 
+> $$4\cos(4\pi t) = 2e^{i4\pi t} + 2e^{-i4\pi t}$$
+> 
+> Therefore:
+> 
+>   
+> 
+> $$c_2 = \frac{1}{T}\int_0^T (2e^{i4\pi t} + 2e^{-i4\pi t})e^{-i4\pi t}\,dt$$
+> 
+> Distribute the multiplication:
+> 
+>   
+> 
+> $$c_2 = \frac{1}{T}\int_0^T \underbrace{2}_{\text{stationary}} + \underbrace{2e^{-i8\pi t}}_{\text{rotating}} \,dt$$
+> 
+> This is the important step! We now have two components:
+> 
+>   
+> 
+> 1. A constant value of 2.
+>     
+>       
+>     
+> 2. A rotating complex vector with amplitude 2.
+>     
+>       
+>     
+> 
+> ## 2. See What Happens Over One Complete Second
+> 
+> Since our signal frequency is $2\text{ Hz}$, it completes two cycles in one second. Let's average both components separately:
+> 
+>   
+> 
+>
+>
+> |**Component**|**Description**|**Average**|**Explanation**|
+> |---|---|---|---|
+> |**Stationary**|Constant value|$2$|It never changes, so its average is always 2.|
+> |**Rotating**|Rotating complex vector|$0$|The vector completes two full clockwise rotations; its positive and negative contributions cancel out.|
+> 
+> فاكر في السيجنالز لما قولنا ان التجميع علي عدد صحيح للساين و الكوساين بيدي صفر؟ لأن النص الفوق من كل واحدة فيهم بيبقي قد النص اللي تحت بعكس الاشارة
+> ![Pasted image 20261030002220.png](/img/user/imgs/Pasted%20image%2020261030002220.png)
+> 
+> ## 3. The Final Answer
+> 
+> Adding the averages:
+> 
+>   
+> 
+> $$c_2 = 2 + 0$$
+> 
+> $$\boxed{c_2 = 2 = \frac{A}{2}}$$
+> 
+> And remember, our original amplitude was 4!
+> 
+>   
+> 
+> The Fourier Transform returns 2 because, under the two-sided complex Fourier representation, half of the cosine's amplitude belongs to the positive frequency ($+2\text{ Hz}$), and the other half belongs to the negative frequency ($-2\text{ Hz}$).
+> 
+>   
+> 
+> ## Key Intuition
+> 
+> When you multiply a signal by the opposite rotating frequency:
+> 
+>   
+> 
+> - The **matching frequency** becomes stationary, so its contribution survives averaging.
+>     
+>       
+>     
+> - The **non-matching frequency** keeps rotating, so its contribution averages to zero (under the appropriate complete-cycle sampling conditions).
+>     
+>       
+>     
+> 
+> That's literally how the Fourier Transform identifies which frequencies are present in a signal!
 
+![Pasted image 20261030002508.png](/img/user/imgs/Pasted%20image%2020261030002508.png)
+
+![Pasted image 20261030002522.png](/img/user/imgs/Pasted%20image%2020261030002522.png)
+
+![Pasted image 20261031225313.png](/img/user/imgs/Pasted%20image%2020261031225313.png)
 ### 3.2 Step-by-Step Hand Calculation ($N = 4$)
 
 To strip away any mystique from the summation formula, let us trace a complete discrete calculation by hand for a $4$-sample cosine wave:
@@ -228,9 +362,7 @@ To strip away any mystique from the summation formula, let us trace a complete d
     $$x = [1, 0, -1, 0]$$
     
     with sample indices $n = [0, 1, 2, 3]$.
-    
-      
-    
+<br>
 - **Evaluating Frequency Bin $k = 1$**:
     
       
@@ -247,20 +379,14 @@ To strip away any mystique from the summation formula, let us trace a complete d
         $$c_1 = \frac{1\cdot(1) + 0\cdot(-i) + (-1)\cdot(-1) + 0\cdot(i)}{4} = \frac{1 + 0 + 1 + 0}{4} = \frac{2}{4} = \frac{1}{2}$$
         
     - **Geometric Result**: When placed head-to-tail in the complex plane, the non-zero products line up along the positive real axis, yielding $c_1 = 0.50$—the wave is found!
-        
-          
-        
+<br>
 - **Evaluating the Remaining Bins ($k = 0, 2, 3$)**:
     
       
     - For $k = 0$ ($0\text{ Hz}$ DC component) and $k = 2$ (the Nyquist bin), the sample products cancel out completely: $c_0 = 0$ and $c_2 = 0$.
-        
-          
-        
+    <br>
     - For $k = 3$ (the negative-frequency mirror of $k = 1$), the products line up identically to yield $c_3 = 1/2 = 0.50$.
-        
-          
-        
+   <br>
     - **One-Sided Amplitude Recovery**: Doubling the non-mirror bin ($2 \times 1/2 = 1$) recovers the exact peak amplitude ($1$) of our original cosine wave $x = [1, 0, -1, 0]$.
         
           
@@ -275,32 +401,23 @@ To strip away any mystique from the summation formula, let us trace a complete d
     $$x_n = \sum_{k=0}^{N-1} c_k e^{+2\pi i k n / N}$$
     
     - **Forward vs. Inverse Symmetry**: Whereas the forward transform uses a **minus sign ($-$)** in the exponent to _stop_ the vectors and divides by $N$ to take an average, the inverse transform uses a **plus sign ($+$)** to _spin the vectors forward again_ from their initial configurations ($c_k$) and simply adds them up at every time point $n$ without dividing by $N$.
-        
-          
-        
+  <br>
     - **Lossless Bijection**: The mapping $\text{signal }(N,) \iff \text{coeff }(N,)$ is a direct, one-to-one bijection where nothing is lost. In numerical practice (using double-precision floating-point arithmetic), reconstructing a signal like $4\cos(2\pi \cdot 2t)$ via the inverse transform reproduces the original time series to within machine precision (a largest error on the order of $3 \times 10^{-13}$).
-        
-          
-        
+<br>
+![Pasted image 20261101004050.png](/img/user/imgs/Pasted%20image%2020261101004050.png)
+<br>
     - **3D Complex Reconstruction**: When calling `ifft` on a complex helical signal such as $3\cos(2\pi \cdot 2t) + i\,3\sin(2\pi \cdot 2t)$ (which has a single spike $c \approx 3$ at $2\text{ Hz}$), both orthogonal parts come back simultaneously: the real part reconstructs the cosine wave, and the imaginary part reconstructs the sine wave.
-        
-          
-        
+<br>![Pasted image 20261031225313.png](/img/user/imgs/Pasted%20image%2020261031225313.png)
+<br>
 - **Spectral Filtering Mechanism**:
     
       
     - If you intentionally modify or zero out specific coefficients in the spectrum before running the inverse transform, the reconstructed time series becomes a modified version of the original—this is the essence of **filtering**.
-        
-          
-        
+<br>
     - **Low-Pass Filtering**: Keep only the slow-spinning vectors (low frequencies) and zero out the fast ones to smooth the signal.
-        
-          
-        
+<br>
     - **Band-Pass Filtering**: Keep only a specific frequency band of vectors (e.g., isolating an EEG rhythm) and zero out everything outside that band.
-        
-          
-        
+<br>
     - **Example:** Suppose a composite waveform is built from $4$ non-zero rotating vectors ($0, 1, 2, 3\text{ Hz}$). If we alter the spectrum to keep only $2$ slow coefficients and set the higher-frequency coefficients to zero, spinning the remaining vectors via the inverse transform constructs a smoothed, low-pass filtered version of the original signal.
         
           
@@ -315,25 +432,19 @@ When we work with digital signals on a computer, we do not have access to contin
 ### 4.1 The Extremes of Observation: $0\text{ Hz}$ to the Nyquist Limit
 
 - **The Slowest Extreme ($0\text{ Hz}$ / DC Offset)**: A $0\text{ Hz}$ wave is a completely flat line where nothing changes over time. Technically, just a single sample is enough to characterize a flat signal.
-    
-      
-    
+<br>
 - **The Fastest Extreme (The Nyquist Frequency)**: Any true oscillation requires **at least 2 samples per cycle**—one sample to capture the peak and one sample to capture the trough.
     
       
-    - **The Nyquist-Shannon Criterion**: Because **sampling rate ($f_s$)** is measured in samples per second and **frequency ($f$)** is measured in cycles per second, to unambiguously observe a frequency $f$, the sampling rate must satisfy $f_s > 2f$ (or equivalently, the maximum observable frequency is $\text{Nyquist} = f_s / 2$).
-        
-          
-        
+    - **The Nyquist-Shannon Criterion**: Because **sampling rate ($f_s$)** is measured in samples per second and **frequency ($f$)** is measured in cycles per second, to unambiguously observe a frequency $f$, the sampling rate must satisfy $f_s > 2f$ (or equivalently, the maximum observable frequency is $\text{Nyquist} = f_s / 2$). more on it [here](https://youtu.be/Jv5FU8oUWEY?si=B7k0qJlA6foia0Mq)
+    <br>
     - **The Phase-Zero Vanishing Edge Case**: At the exact boundary $f_s = 2f$, a cosine wave sampled at its peaks and troughs is visible, _but a sine wave sampled precisely at its zero-crossings vanishes completely into a flat line of zeros_!
-        
-          
-        
+    <br>
     - **Example:** If we record $0.1\text{ s}$ of a signal at a sampling rate of $f_s = 100\text{ Hz}$, the slowest frequency we can see is $0\text{ Hz}$ (flat), and the fastest frequency we can faithfully resolve is the **Nyquist limit**: $f_s / 2 = 50\text{ Hz}$. Both a slow $2\text{ Hz}$ wave and a boundary $50\text{ Hz}$ cosine wave are accurately reflected by their samples as $2\text{ Hz}$ and $50\text{ Hz}$, respectively.
         
           
         
-
+![Pasted image 20261101213919.png](/img/user/Pasted%20image%2020261101213919.png)
 ### 4.2 Aliasing and Spectral Mirroring
 
 What happens if the physical signal oscillates _faster_ than the Nyquist limit ($f > f_s / 2$)? The discrete samples can no longer keep up with every peak and trough, triggering a deceptive phenomenon known as **aliasing**.
@@ -341,24 +452,16 @@ What happens if the physical signal oscillates _faster_ than the Nyquist limit (
   
 
 - **The Aliasing Mechanism**: When a signal's frequency exceeds $f_s / 2$, the discrete sampling grid skips oscillating points in the middle of each cycle. As a result, the captured sample points fall on the exact trajectory of a slower wave, masquerading as a false lower frequency given by $f_{\text{alias}} = f_s - f$.
-    
-      
-    
+<br>
 - **Spectral Symmetry Around Nyquist**: Because of conjugate symmetry in the Discrete Fourier Transform of a real signal, the computed spectrum from $0$ to $f_s$ mirrors itself around the Nyquist frequency $f_s / 2$:
     
       
     - **$0\text{ to } f_s/2$ ($0\text{ to } 50\text{ Hz}$)**: Represents the true **positive frequencies**.
-        
-          
-        
+ <br>
     - **$f_s/2\text{ to } f_s$ ($50\text{ to } 100\text{ Hz}$)**: Represents the **negative frequencies (the mirror image)**.
-        
-          
-        
+    <br>
     - **One-Sided Spectrum Scaling Rule**: When plotting a standard one-sided amplitude spectrum from $0\text{ Hz}$ to $\text{Nyquist}$ ($N//2 + 1$ points), we must multiply the magnitudes of all interior bins by $2$ to account for their negative-frequency mirror twins—**except** for the $0\text{ Hz}$ bin and the Nyquist bin ($f_s / 2$), which have no separate mirror twin and must never be doubled.
-        
-          
-        
+ <br>
     - **Case Study:** Suppose our ADC (Analog-to-Digital Converter) samples at $f_s = 100\text{ Hz}$ ($\text{Nyquist} = 50\text{ Hz}$):
         
           
@@ -374,7 +477,7 @@ What happens if the physical signal oscillates _faster_ than the Nyquist limit (
             
               
             
-
+![Pasted image 20261101214031.png](/img/user/Pasted%20image%2020261101214031.png)
 ## 5. Computational Implementation: Fourier From Scratch
 
 Let us bridge our theoretical equations with practical scientific computing in **MATLAB** and **Python (NumPy)**, examining how the forward transform, one-sided spectral scaling, and inverse reconstruction are implemented line by line.
@@ -387,9 +490,9 @@ Consider a $2\text{-second}$ recording of a pure cosine wave $x(t) = 4\cos(2\pi 
 
   
 
-Python
 
-```
+
+```Python
 import numpy as np
 
 # 1. Signal Generation (Time Domain)
@@ -423,24 +526,282 @@ for i in range(N):
     reconstructed += coeff[i] * np.exp(2j * np.pi * fr[i] * complex_sine_wave_t)
 ```
 
-  
+  ![Pasted image 20261101212247.png](/img/user/Pasted%20image%2020261101212247.png)
+
+![Pasted image 20261101212305.png](/img/user/Pasted%20image%2020261101212305.png)
 
 - **Unpacking the Operational Workflow**:
     
       
     - **Frequency Resolution ($\Delta f$)**: Because the signal is $2\text{ seconds}$ long ($N = 200$ at $f_s = 100\text{ Hz}$), the $101$ frequency points spanning $0\text{ to } 50\text{ Hz}$ (`pts_hz`) are spaced by $0.5\text{ Hz}$ ($0, 0.5, 1.0, 1.5, 2.0, \dots, 50\text{ Hz}$).
-        
-          
-        
+    <br>
     - **Why Index 4?**: Our $2\text{ Hz}$ signal completes $4$ full cycles over the $2\text{-second}$ window, so its positive frequency spike lands at array index $k = 4$ ($4 \times 0.5\text{ Hz} = 2.0\text{ Hz}$).
-        
-          
-        
+  <br>
     - **Numerical Verification**: Out of the $200$ complex coefficients in `coeff`, $198$ evaluate to $0$, while two land on the real axis (`coeff[4] = 400 / 200 = 2` with `angle = 0` because a cosine starts at its peak, and its mirror twin at `coeff[196] = 2`). After doubling the interior bins (`m[1:N//2] *= 2`), the one-sided spectrum displays a single spike of magnitude $4$ at $2\text{ Hz}$.
         
           
         
 
+> [!FAQ]
+> 
+> # `fr` vs. `pts_hz`: What's the exact difference?
+> 
+> `fr` represents raw, unitless **frequency bin indices** used for the internal math of the Discrete Fourier Transform (DFT), whereas `pts_hz` represents the **physical frequencies in Hertz (cycles per second)** used to interpret and plot the valid portion of the spectrum.
+> 
+>   
+> 
+> ## 1. `fr` vs. `pts_hz`: What's the exact difference?
+> 
+> The core difference comes down to **total cycles over the recording window** versus **cycles per second**, and **two-sided** versus **one-sided** representation.
+> 
+>   
+> 
+>
+>
+> |**Feature**|**fr (Frequency Bin Indices)**|**pts_hz (Physical Frequencies in Hz)**|
+> |---|---|---|
+> |**Values**|`[0, 1, 2, ..., 199]`|`[0.0, 0.5, 1.0, ..., 50.0]`|
+> |**Length**|`200` (`N`)|`101` (`N // 2 + 1`)|
+> |**Units**|**Cycles per entire window** ($2\text{ seconds}$)|**Cycles per second (Hz)**|
+> |**Role**|Internal DFT computation (two-sided)|Human-readable x-axis for plotting (one-sided)|
+> 
+> ### Why they scale differently
+> 
+> In your setup, the signal duration is $T = 2\text{ seconds}$ ($N = 200\text{ samples}$ at $f_s = 100\text{ Hz}$), and `complex_sine_wave_t` is normalized from `0` to `1` across that entire 2-second window.
+> 
+>   
+> 
+> - When `fr[i] = 1`, the test sine wave completes **1 full cycle over the 2-second window**, which equals $0.5\text{ Hz}$.
+>     
+>       
+>     
+> - When `fr[i] = 4`, the test sine wave completes **4 full cycles over the 2-second window**, which equals your $2\text{ Hz}$ signal ($4\text{ cycles} / 2\text{ s} = 2\text{ Hz}$).
+>     
+>       
+>     
+> 
+> To convert any valid bin index $k$ in `fr` (up to index $100$) into physical Hertz, you multiply by the **frequency resolution** $\Delta f = \frac{f_s}{N} = \frac{100}{200} = 0.5\text{ Hz/bin}$:
+> 
+>   
+> 
+> $$f_{\text{Hz}} = k \cdot \frac{f_s}{N}$$
+> 
+> That is why `fr[4]` maps to `pts_hz[4] = 2.0 Hz`.
+> 
+>   
+> 
+> ## 2. Line-by-Line Breakdown of Section 4 (One-Sided Spectrum)
+> 
+> When you compute the DFT of a purely **real-valued signal** (like your cosine wave), Euler's formula splits every cosine into a positive and a negative complex exponential:
+> 
+>   
+> 
+> $$\cos(\theta) = \frac{e^{j\theta} + e^{-j\theta}}{2}$$
+> 
+> Because of this symmetry, half the signal's amplitude goes into the positive frequencies (bins `1` to `99`), and the other half mirrors into the negative frequencies (which the DFT wraps around into bins `101` to `199`). Section 4 converts this redundant two-sided math output into a clean, physical one-sided spectrum:
+> 
+>   
+> 
+> ### Line 1: `nyquist = fs / 2`
+> 
+> 
+> 
+> ```Python
+> nyquist = fs / 2  # Nyquist = 50 Hz
+> ```
+> 
+> - **The Physics:** According to the Nyquist-Shannon sampling theorem, you need at least 2 samples per cycle to uniquely capture a frequency. Sampling at $f_s = 100\text{ Hz}$ means the highest physical frequency you can measure without aliasing is $50\text{ Hz}$.
+>     
+>       
+>     
+> - **In the DFT array:** Bin `0` is $0\text{ Hz}$, and bin `N // 2` (index `100`) is the Nyquist limit ($50\text{ Hz}$). Everything above index `100` (indices `101` to `199`) does not represent $50.5\text{ Hz}$ to $99.5\text{ Hz}$—it is the **wrapped-around negative frequency mirror** of bins `1` to `99`.
+>     
+>       
+>     
+> 
+> ### Line 2: `pts_hz = np.linspace(0, nyquist, N // 2 + 1)`
+> 
+> 
+> 
+> ```Python
+> pts_hz = np.linspace(0, nyquist, N // 2 + 1)  # 101 points: 0, 0.5, ..., 50 Hz
+> ```
+> 
+> - **Why `N // 2 + 1`?** You are building the frequency axis for the non-redundant half of the spectrum.
+>     
+>       
+>     - You have `N // 2` positive frequency steps (`200 // 2 = 100` steps of $0.5\text{ Hz}$).
+>         
+>           
+>         
+>     - Including **both endpoints**—`0 Hz` (index `0`, DC offset) and `50 Hz` (index `100`, Nyquist)—gives `100 + 1 = 101` total points.
+>         
+>           
+>         
+> - **Plotting Note:** When you plot your one-sided spectrum against `pts_hz`, you must slice `m` to match its length: `m[:N//2 + 1]` (indices `0` through `100`).
+>     
+>       
+>     
+> 
+> ### Line 3: `m[1:N//2] = m[1:N//2] * 2`
+> 
+> 
+> 
+> ```Python
+> m[1:N//2] = m[1:N//2] * 2  # Double interior bins (exclude 0 Hz & 50 Hz)
+> ```
+> 
+> - **Why double the magnitudes?** Your original signal is $4\cos(2\pi \cdot 2t)$, which has a true amplitude of **4**. However, after normalizing by `N` in Step 3 (`coeff = coeff / N`), the DFT split that amplitude equally between two bins:
+>     
+>       
+>     - **Bin `4`** ($+2\text{ Hz}$): magnitude `m[4] = 2.0`
+>         
+>           
+>         
+>     - **Bin `196`** ($-2\text{ Hz}$, at index $200 - 4$): magnitude `m[196] = 2.0`
+>         
+>         Because a one-sided spectrum discards the upper half of the array (bins `101` to `199`), you must multiply the positive interior bins by `2` so that `m[4]` returns to its true physical amplitude of **4.0**.
+>         
+>           
+>         
+> - **Why does the slice `1:N//2` exclude index `0` and index `100`?**
+>     
+>     In Python, `1:100` selects indices `1` through `99`, deliberately leaving out two special bins that **do not have a mirror twin** in the upper half:
+>     
+>       
+>     1. **Index `0` ($0\text{ Hz}$ / DC component):** A constant vertical shift has no oscillation ($+0\text{ Hz}$ and $-0\text{ Hz}$ are the exact same bin). All of its amplitude is already concentrated in `m[0]`. Doubling it would make your DC offset twice as large as reality.
+>         
+>           
+>         
+>     2. **Index `N // 2` (Index `100` / $50\text{ Hz}$ Nyquist):** When `N` is an even number (`200`), the Nyquist bin at index `100` sits at the exact folding point of the DFT circle ($\frac{N}{2}$ and $N - \frac{N}{2}$ both equal `100`). Because it is its own mirror image, its energy is never split across two separate bins, so it must not be doubled.
+>
+># To convert any valid bin index $k$ in fr (up to index $100$) into physical Hertz, you multiply by the frequency resolution $\Delta f = \frac{f_s}{N} = \frac{100}{200} = 0.5\text{ Hz/bin}$:
+>
+>$f_{\text{Hz}} = k \cdot \frac{f_s}{N}$, why exactly 
+>
+  >
+>
+>
+> 
+> The DFT algorithm is completely "blind" to physical time (seconds) and your sampling rate ($f_s$). It only sees an array of $N = 200$ numbers and measures frequencies in **cycles per array** rather than cycles per second.
+> 
+>   
+> 
+> ### 1. Look at the two time vectors in your code
+> 
+> You created two different time arrays in your script:
+> 
+>   
+> 
+> - **Physical time (`t`):** Used to generate your real-world signal.
+>     
+>       
+>     
+>     Python
+>     
+>     ```
+>     t = np.arange(0, 2, 1/fs)  # [0.00, 0.01, 0.02, ..., 1.99] seconds
+>     ```
+>     
+> - **Normalized DFT time (`complex_sine_wave_t`):** Used inside the DFT loop.
+>     
+>       
+>     
+>     Python
+>     
+>     ```
+>     complex_sine_wave_t = np.arange(N) / N  # [0/200, 1/200, 2/200, ..., 199/200]
+>     ```
+>     
+> 
+> Notice that `complex_sine_wave_t` **always goes from `0` to `1`**, regardless of whether your recording lasted 2 seconds, 10 seconds, or 0.001 seconds. It represents the **fraction of the total recording window completed** (from $0\%$ to $100\%$ of the array).
+> 
+>   
+> 
+> ### 2. How the DFT sine wave behaves with `complex_sine_wave_t`
+> 
+> Inside your `for` loop, the DFT generates a probing wave for each bin index $k = \text{fr}[i]$:
+> 
+>   
+> 
+> $$\text{wave}_k = e^{-j \cdot 2\pi \cdot k \cdot \text{complex\_sine\_wave\_t}}$$
+> 
+> A sine or cosine wave completes **1 full cycle** every time the angle inside it advances by $2\pi$ radians:
+> 
+>   
+> 
+> - **When $k = 1$ (`fr[1]`):** As `complex_sine_wave_t` runs from $0$ to $1$ across all 200 samples, the angle $2\pi \cdot (1) \cdot \text{complex\_sine\_wave\_t}$ goes from $0$ to $2\pi$. That means this wave stretches **1 full cycle across all 200 samples**.
+>     
+>       
+>     
+> - **When $k = 4$ (`fr[4]`):** As `complex_sine_wave_t` runs from $0$ to $1$, the angle $2\pi \cdot (4) \cdot \text{complex\_sine\_wave\_t}$ goes from $0$ to $8\pi$ ($4 \times 2\pi$). That means this wave fits **4 full cycles across all 200 samples**.
+>     
+>       
+>     
+> 
+> ### 3. Connecting the two worlds (Why $f_{\text{Hz}} = k \cdot \frac{f_s}{N}$)
+> 
+> Now, compare the **physical time** it took to record those 200 samples with the **number of cycles** the DFT wave completed across those same 200 samples:
+> 
+>   
+> 
+> 1. **How long is the 200-sample window in real time ($T$)?** You recorded $N = 200$ samples at $f_s = 100\text{ samples per second}$:
+>     
+>       
+>     
+>     $$T = \frac{N}{f_s} = \frac{200\text{ samples}}{100\text{ samples/sec}} = 2\text{ seconds}$$
+>     
+> 2. **What is the definition of Hertz ($\text{Hz}$)?** Hertz means **cycles per 1 second**:
+>     
+>       
+>     
+>     $$f_{\text{Hz}} = \frac{\text{Total cycles in the window}}{\text{Total seconds in the window } (T)}$$
+>     
+> 1. **Substitute $k$ and $T$ into the formula:** Since bin $k$ (`fr[i]`) always equals the **total cycles in the window**, and $T = \frac{N}{f_s}$ is the **total seconds in the window**:
+>     
+>       
+>     
+>     $$f_{\text{Hz}} = \frac{k}{T} = \frac{k}{\left(\frac{N}{f_s}\right)} = k \cdot \frac{f_s}{N}$$
+>     
+> 
+> ### 4. Proving it with the sample index $n$ directly
+> 
+> You can also see this by comparing the exponents of your original signal and the DFT's test wave at any sample index $n$ (where $n = 0, 1, 2, \dots, 199$):
+> 
+>   
+> 
+> - **Your physical signal at sample $n$:** Since $t[n] = \frac{n}{f_s}$, a physical frequency $f_{\text{Hz}}$ has the angle:
+>     
+>       
+>     
+>     $$\theta_{\text{signal}}[n] = 2\pi \cdot f_{\text{Hz}} \cdot \frac{n}{f_s}$$
+>     
+> - **The DFT test wave at sample $n$:** Since $\text{complex\_sine\_wave\_t}[n] = \frac{n}{N}$, bin $k$ has the angle:
+>     
+>       
+>     
+>     $$\theta_{\text{DFT}}[n] = 2\pi \cdot k \cdot \frac{n}{N}$$
+>     
+> 
+> For the DFT test wave at bin $k$ to match your physical signal sample-for-sample (which is when the dot product `complex_sine_wave @ signal` spikes), their angles must be identical:
+> 
+>   
+> 
+> $$2\pi \cdot f_{\text{Hz}} \cdot \frac{n}{f_s} = 2\pi \cdot k \cdot \frac{n}{N}$$
+> 
+> Cancel $2\pi \cdot n$ from both sides:
+> 
+>   
+> 
+> $$\frac{f_{\text{Hz}}}{f_s} = \frac{k}{N} \implies f_{\text{Hz}} = k \cdot \frac{f_s}{N}$$
+> 
+> Plug in your signal's frequency ($f_{\text{Hz}} = 2\text{ Hz}$, $f_s = 100$, $N = 200$):
+> 
+>   
+> 
+> $$2 = k \cdot \frac{100}{200} \implies 2 = k \cdot 0.5 \implies k = 4$$
+> 
+> That is why a $2\text{ Hz}$ signal lands in bin $k = 4$ (`fr[4]`), and why each bin step in `fr` is worth $\frac{f_s}{N} = 0.5\text{ Hz}$.
 ### 5.2 Equivalent MATLAB Formulation (`wave_fourier.m`)
 
 - In MATLAB, the exact same forward-and-inverse loop architecture is expressed concisely using matrix-vector multiplication:
@@ -451,9 +812,9 @@ for i in range(N):
         
           
         
-        Matlab
         
-        ```
+        
+        ```Matlab
         complex_sine_wave = exp(-2*pi*1i*fr(i)*complex_sine_wave_t);
         coeff(i) = complex_sine_wave * signal';
         coeff = coeff ./ N;
@@ -466,9 +827,9 @@ for i in range(N):
         
           
         
-        Matlab
         
-        ```
+        
+        ```Matlab
         reconstructed = reconstructed + coeff(i) * exp(2*pi*1i*fr(i)*complex_sine_wave_t);
         ```
         
@@ -479,26 +840,98 @@ for i in range(N):
           
         
 
-## Professor's Synthesis
 
-If there is one overarching takeaway I want you to carry from this lecture into your research in **Brain-Computer Interfacing** and signal processing, it is this: **The Fourier Transform is not a black-box formula—it is a geometric coordinate transformation.**
+## Where the Basic DFT Fails (4 Core Limitations)
 
+### 1. Spectral Leakage
+
+* **The Bin Grid Constraint:** DFT frequency bins sit strictly at intervals of $\Delta f = \frac{1}{T}$. For a recording window of $T = 2\text{ s}$, bins are spaced every $0.5\text{ Hz}$ (`0.0, 0.5, 1.0, 1.5, 2.0, 2.5 Hz...`).
   
+* **Falling Between Bins:** A $2.25\text{ Hz}$ signal completes $2.25 \times 2 = 4.5\text{ turns}$ in $2\text{ seconds}$. Because $4.5$ is not an integer, there is no `fr[4.5]` bin—it sits halfway between bin `4` ($2.0\text{ Hz}$) and bin `5` ($2.5\text{ Hz}$).
+* **Boundary Discontinuity:** In the time domain, $4.5\text{ turns}$ means the cosine wave starts at a peak ($+4$) and ends at a trough ($-4$). Because the DFT assumes the signal is periodic (wrapping the end back to the start), this creates a sharp cliff at the boundary.
+* **Energy Spreading:** Instead of a single clean spike of amplitude `4`, the energy "leaks" into neighboring bins. The spectrum shows two twin peaks straddling $2.25\text{ Hz}$ (at $2.0\text{ Hz}$ and $2.5\text{ Hz}$) with decaying tails spreading across the rest of the spectrum.
 
-When you look at a raw time-domain recording, you are watching the tangled, composite shadow of dozens of spinning complex vectors all added together at each instant in time. By multiplying that signal by a counter-rotating vector $e^{-i 2\pi f t}$ and averaging over time, you are mathematically "stepping onto the merry-go-round" at frequency $f$: any component spinning at that exact speed appears stationary to you and accumulates into a non-zero complex number $c_f$ (encoding its amplitude and starting phase), while every other frequency spins around you in a blur and averages out to zero.
+### 2. "Which, Not When" (Loss of Time Localization)
+* **Global Averaging:** The dot product `complex_sine_wave @ signal` integrates across the entire recording window at once. It tells you **which** frequencies are present, but destroys information about **when** they occurred.
+* **The Ambiguity:** A signal where $2\text{ Hz}$ plays for the first second followed by $8\text{ Hz}$ for the second second produces the **exact same two frequency peaks** as a signal where $2\text{ Hz}$ and $8\text{ Hz}$ play simultaneously for the whole duration.
+* **Solutions for Non-Stationary Signals (e.g., EEG):**
+  * **Short-Time Fourier Transform (STFT):** Slides a short time window across the signal to compute localized spectra over time (spectrogram).
+  * **Wavelets:** Uses localized wave packets that adapt their width to different frequencies, ideal for tracking transient brainwave bursts in EEG.
 
-  
+### 3. Computational Complexity: $\mathcal{O}(N^2)$ vs. $\mathcal{O}(N \log N)$
+* **The Manual Loop ($\mathcal{O}(N^2)$):** Running a `for` loop over $N$ bins where each iteration performs an $N$-element dot product requires $N \times N = N^2$ multiplications.
+  * For $N = 200$: $200^2 = 40,000\text{ multiplications}$.
+  * Scales poorly for long recordings (e.g., $N = 100,000 \implies 10^{10}$ operations).
+* **Fast Fourier Transform (`np.fft.fft`):** Exploits symmetry in the complex exponentials to compute the **exact same coefficients** in $\mathcal{O}(N \log_2 N)$ operations ($\approx 1,528$ operations for $N = 200$).
 
-In practical engineering and neuroscience, this geometric insight carries three critical implications:
+### 4. The Nyquist Limit & Frequency Folding
+* **Strict Rule:** The sampling rate must strictly satisfy $f_s > 2 f_{\max}$ (or $f_{\max} < \frac{f_s}{2}$), otherwise frequencies above the Nyquist limit fold back (alias) into the lower spectrum.
+* **Why Strictly ($>$ and not $\ge$):** At exactly $f = \frac{f_s}{2}$, a sine wave's samples can land exclusively on zero-crossings ($\sin(\pi n) = 0$), causing the signal to vanish completely.
 
-  
+![Pasted image 20261101231835.png](/img/user/Pasted%20image%2020261101231835.png)
 
-1. **Feature Extraction & Compression**: Complex physiological states—such as distinguishing mental imagery states in an EEG-based BCI or separating overlapping acoustic sources—often look like chaotic noise in the time domain but separate cleanly into distinct, quantifiable spectral peaks in the frequency domain.
-    
-      
-    
-2. **Zero-Phase & Targeted Filtering**: Because the forward and inverse transforms form a lossless bijection ($\text{time} \iff \text{frequency}$), you have surgical control over a signal's spectral content. By attenuating specific frequency bins and spinning the remaining vectors forward via the inverse transform, you can strip out artifacts or isolate narrowband rhythms effortlessly.
-    
-      
-    
-3. **Hardware & Experimental Design Discipline**: No amount of post-processing math can rescue a signal that was improperly sampled. Because any frequency above the **Nyquist limit ($f_s / 2$)** folds back into the lower spectrum via **aliasing** ($f_{\text{alias}} = f_s - f$), you must always ensure your sampling rate is strictly greater than twice the highest physical frequency present in your environment ($f_s > 2f_{\max}$). Master the geometry of these spinning vectors, respect the Nyquist boundary, and the frequency domain will become your most powerful analytical lens.
+---
+
+## Part 2: Case Study — 60 Hz Mains Hum in EEG (Aliasing)
+
+> [!question] Scenario Setup
+> * **Signal:** EEG recorded at $f_s = 100\text{ Hz}$ for $T = 2\text{ s}$ ($N = 200\text{ samples}$, Nyquist $= 50\text{ Hz}$, bin spacing $\Delta f = 0.5\text{ Hz}$)[cite: 1, 2].
+> * **Noise:** Power-line ("mains") interference adds a **$60\text{ Hz}$ hum** with an **amplitude of $4$**.
+
+### Q1: Where does the 60 Hz hum appear on the 0–50 Hz spectrum?
+* **Answer:** At **$40\text{ Hz}$**.
+* **Why (Undersampling):** Because $60\text{ Hz} > 50\text{ Hz}$ ($\frac{f_s}{2}$), there are fewer than 2 samples per cycle ($100 / 60 = 1.67\text{ samples/turn}$). The rapid oscillations between sample points are lost, and the discrete samples trace a slower wave:
+  $$f_{\text{alias}} = \left| f_s - f_{\text{signal}} \right| = 100 - 60 = 40\text{ Hz}$$
+* **Mathematical Proof (Identical Samples):** At $f_s = 100\text{ Hz}$, sample $n$ occurs at $t = \frac{n}{100}$:
+  $$\cos\left(2\pi \cdot 60 \cdot \frac{n}{100}\right) = \cos\left(2\pi (100 - 40) \frac{n}{100}\right) = \cos\left(2\pi n - 2\pi \cdot 40 \cdot \frac{n}{100}\right) = \cos\left(2\pi \cdot 40 \cdot \frac{n}{100}\right)$$
+* **In the DFT Array:** Over $2\text{ s}$, $60\text{ Hz}$ completes $120\text{ turns}$ (landing in bin `120`), while its conjugate mirror lands at bin $200 - 120 = \text{bin } 80$. In the one-sided spectrum (`bins 0..100`), bin `80` maps to $80 \times 0.5\text{ Hz} = 40\text{ Hz}$.
+
+### Q2: How tall is the peak?
+* **Answer:** A single sharp peak of **height $4$** at $40\text{ Hz}$.
+* **Why:** Because $40\text{ Hz}$ lands squarely on bin `80` ($40 / 0.5 = 80$, an exact integer), there is **zero spectral leakage**. After normalizing by $N$ and doubling the interior one-sided bins (`m[1:N//2] * 2`), the full amplitude of $4$ is recovered at $40\text{ Hz}$.
+
+### Q3: How do you get rid of it?
+* **Answer:** You **must** eliminate it **before sampling**:
+  1. **Increase Sampling Rate:** Set $f_s > 120\text{ Hz}$ strictly (in practice, much higher like $250\text{ Hz}$ or $500\text{ Hz}$) so $60\text{ Hz}$ stays below Nyquist and can be digitally notch-filtered later.
+  2. **Hardware Anti-Aliasing Filter:** Pass the analog EEG signal through a physical low-pass filter (blocking frequencies $> 45\text{ Hz}$) *before* it reaches the Analog-to-Digital Converter (ADC).
+
+> [!warning] Why You Cannot Fix Aliasing in Software After Sampling
+> Once sampled at $100\text{ Hz}$, the $60\text{ Hz}$ hum is mathematically indistinguishable from **real $40\text{ Hz}$ gamma-band brain activity**. Applying a digital filter at $40\text{ Hz}$ in Python would erase genuine $40\text{ Hz}$ neural data along with the noise.
+
+![Pasted image 20261101232107.png](/img/user/Pasted%20image%2020261101232107.png)
+
+---
+
+## Summary Reference Table
+
+| Phenomenon             | Cause                                                           | Condition                                                                      | Visual Effect in Spectrum                                      | Fix                                                                                       |
+| :--------------------- | :-------------------------------------------------------------- | :----------------------------------------------------------------------------- | :------------------------------------------------------------- | :---------------------------------------------------------------------------------------- |
+| **Spectral Leakage**   | Signal frequency is not a multiple of $\Delta f = 1/T$ | $f \bmod \frac{1}{T} \neq 0$ (e.g., $2.25\text{ Hz}$ in $2\text{ s}$) | Peak splits and spreads across neighboring bins       | Apply a window function (Hann/Hamming) or adjust $T$                                      |
+| **Time Loss**          | DFT sums over the entire window $T$                    | Non-stationary signals ($f$ changes over time)                        | Sequential vs. simultaneous tones look identical      | Use **STFT** (spectrogram) or **Wavelets**                                       |
+| **Slow Execution**     | Naive nested loop / dot product per bin                | $\mathcal{O}(N^2)$ scaling                                            | Identical output, slow runtime                        | Use Fast Fourier Transform (`np.fft.fft`, $\mathcal{O}(N \log N)$)               |
+| **Aliasing (Folding)** | Undersampling high frequencies[cite: 1, 2]                      | $f_{\max} \ge \frac{f_s}{2}$ (violates Nyquist)[cite: 1, 2]                    | High frequency folds into false lower bin ($f_s - f$) | Hardware anti-alias filter or increase $f_s > 2 f_{\max}$ **before** sampling[cite: 1, 2] |
+
+> [!summary] من الآخر
+> 
+> 
+> If there is one overarching takeaway I want you to carry from this lecture into your research in **Brain-Computer Interfacing** and signal processing, it is this: **The Fourier Transform is not a black-box formula—it is a geometric coordinate transformation.**
+> 
+>   
+> 
+> When you look at a raw time-domain recording, you are watching the tangled, composite shadow of dozens of spinning complex vectors all added together at each instant in time. By multiplying that signal by a counter-rotating vector $e^{-i 2\pi f t}$ and averaging over time, you are mathematically "stepping onto the merry-go-round" at frequency $f$: any component spinning at that exact speed appears stationary to you and accumulates into a non-zero complex number $c_f$ (encoding its amplitude and starting phase), while every other frequency spins around you in a blur and averages out to zero.
+> 
+>   
+> 
+> In practical engineering and neuroscience, this geometric insight carries three critical implications:
+> 
+>   
+> 
+> 1. **Feature Extraction & Compression**: Complex physiological states—such as distinguishing mental imagery states in an EEG-based BCI or separating overlapping acoustic sources—often look like chaotic noise in the time domain but separate cleanly into distinct, quantifiable spectral peaks in the frequency domain.
+>     
+>       
+>     
+> 2. **Zero-Phase & Targeted Filtering**: Because the forward and inverse transforms form a lossless bijection ($\text{time} \iff \text{frequency}$), you have surgical control over a signal's spectral content. By attenuating specific frequency bins and spinning the remaining vectors forward via the inverse transform, you can strip out artifacts or isolate narrowband rhythms effortlessly.
+>     
+>       
+>     
+> 3. **Hardware & Experimental Design Discipline**: No amount of post-processing math can rescue a signal that was improperly sampled. Because any frequency above the **Nyquist limit ($f_s / 2$)** folds back into the lower spectrum via **aliasing** ($f_{\text{alias}} = f_s - f$), you must always ensure your sampling rate is strictly greater than twice the highest physical frequency present in your environment ($f_s > 2f_{\max}$). Master the geometry of these spinning vectors, respect the Nyquist boundary, and the frequency domain will become your most powerful analytical lens.
