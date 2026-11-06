@@ -24,7 +24,7 @@
 ---
 # Main sources for these notes: Slides, Gemini Pro, Sheets
 
-- [x] [[4th Year/1st Term/GANs/Home\|GANs]]
+- [x] [[4th Year/1st Term/GANs/All Lectures Notes - GANs\|GANs]]
 	- [x] Lecture 1 - Introduction
 	- [x] Lecture 2 - Autoregressive Models
 	- [x] Lecture 3 - Autoencoders and VAEs
@@ -37,7 +37,7 @@
 	- [ ] Lecture 4 - Robots Components, DOF, Actuators and Stability
 	- [ ] Lecture 5 - Sensors
 	- [ ] Lecture 6 - Signal processing and Fourier Transform
-	- [ ] Lecture 7 - Locomotion
+	- [x] Lecture 7 - Locomotion
 
 - [ ] [[4th Year/1st Term/Unsupervised/Home\|Unsupervised]]
 	- [ ] Lecture 1 - Introduction : Linear Algebra, ML, and Stats
@@ -51,6 +51,7 @@
 	- [x] Lecture 2 - Montage, Referencing, EGG input formatting
 	- [x] Lecture 3 - Cosine and sine, EGG and Wave Slicing (mostly if not entirely code)
 	- [x] Lecture 4 - Fourier Transform
+	- [ ] Lecture 5 - Signal Filtering
 
 - [ ] [[4th Year/1st Term/Selected Topics/Home\|Selected Topics in AI]]
 	- [ ] Lecture 1 - Introduction to CNNs

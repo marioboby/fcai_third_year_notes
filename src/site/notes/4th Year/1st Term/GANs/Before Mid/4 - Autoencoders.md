@@ -538,12 +538,9 @@ Introduced in the landmark paper _Auto-Encoding Variational Bayes_ (Diederik P. 
     
       
     - The VAE establishes a **Bidirectional Mapping** between the **Data Space ($X$)** and the **Latent Space ($\mathcal{N}(0, 1)$)**:
-        
-          
+    <br>
         - **Inference (Encoder, $E$):** Parameterizes the probabilistic distribution $q_\theta(z\vert{}x)$, mapping an observed input data point $x$ to a distribution over latent variables $z$.
-            
-              
-            
+        <br>
         - **Generation (Decoder, $G$):** Parameterizes the probabilistic distribution $p_\phi(x\vert{}z)$, mapping a sampled latent vector $z$ back to a reconstructed data point $\hat{x}$ (or $\tilde{x}$).
     <br>
     - The network is governed by a dual objective: $\mathcal{L}_{total} = \mathcal{L}_{MSE} + \mathcal{L}_{kl}$, where $\mathcal{L}_{MSE}$ ensures high-fidelity reconstruction between $x$ and $\hat{x}$, and $\mathcal{L}_{kl}$ regularizes the latent space $Z$ to conform to $\mathcal{N}(0, 1)$.

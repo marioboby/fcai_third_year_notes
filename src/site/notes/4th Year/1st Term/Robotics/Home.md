@@ -8,6 +8,7 @@
 
 [[4th Year/1st Term/Robotics/Before Mid/Lecture 1 - Intro\|Lecture 1 - Intro]]
 [[4th Year/1st Term/Robotics/Before Mid/Lecture 2 - Fundamentals, Locomotion, Manipulation, and kinematics\|Lecture 2 - Fundamentals, Locomotion, Manipulation, and kinematics]]
+[[4th Year/1st Term/Robotics/Before Mid/Lecture 7 - Autonomous Robot Localization, Odometry, and Probabilistic State Estimation\|Lecture 7 - Autonomous Robot Localization, Odometry, and Probabilistic State Estimation]]
 
 ---
 ## After Mid
