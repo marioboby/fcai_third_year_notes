@@ -217,72 +217,68 @@ $$\mathcal{J}_{\text{CAE}}(\theta) = \sum_{x \in \mathcal{D}_n} \left(L(x, g(f(x
 
 ### Variational Autoencoder (VAE)
 
-#### 1. Setup & Formula
+
+### 1. Setup & Formula
 
 A Variational Autoencoder maps input data into a parameterized latent distribution $q_\phi(z \mid x) = \mathcal{N}(\mu, \sigma^2)$ characterized by predicted mean ($\mu$) and standard deviation ($\sigma$) vectors.
 
   
 
-- **Latent Dimension**: $D = 2$ neurons ($z \in \mathbb{R}^2$)
+- **Latent Dimension:** $D = 2$ neurons ($z \in \mathbb{R}^2$)
     
       
     
-- **Reparameterization Trick**: Ensures differentiability by decoupling stochasticity:
+- **Reparameterization Trick:** Ensures differentiability by decoupling stochasticity:
     
       
     
     $$z = \mu + \sigma \odot \epsilon, \quad \text{where } \epsilon \sim \mathcal{N}(0, I)$$
     
-      
-    
-- **Reconstruction Loss (MSE)**:
+- **Reconstruction Loss (MSE, averaged over data features $n=2$):**
     
       
     
     $$\mathcal{L}_{\text{rec}} = \frac{1}{n} \sum_{i=1}^{n} (x_i - \hat{x}_i)^2$$
     
-      
-    
-- **Latent Regularization (KL Divergence to Standard Normal $\mathcal{N}(0, I)$)**:
+- **Latent Regularization (Averaged KL Divergence to Standard Normal $\mathcal{N}(0, I)$):**
     
       
     
-    $$D_{\text{KL}}\left(\mathcal{N}(\mu, \sigma^2) \,\parallel\, \mathcal{N}(0, 1)\right) = -\frac{1}{2} \sum_{j=1}^{D} \left(1 + \ln(\sigma_j^2) - \mu_j^2 - \sigma_j^2\right)$$
+    $$\mathcal{L}_{\text{KL}} = \frac{1}{D} D_{\text{KL}}\left(\mathcal{N}(\mu, \sigma^2) \,\parallel\, \mathcal{N}(0, I)\right) = -\frac{1}{2D} \sum_{j=1}^{D} \left(1 + \ln(\sigma_j^2) - \mu_j^2 - \sigma_j^2\right)$$
+    
+- **Total Loss (per sample):**
     
       
     
-- **Total Loss**:
+    $$\mathcal{L} = \mathcal{L}_{\text{rec}} + \beta \mathcal{L}_{\text{KL}}$$
+    
+- **Batch Total Loss ($B = 2$):**
     
       
     
-    $$\mathcal{L}_{\text{total}} = \mathcal{L}_{\text{rec}} + \beta \mathcal{L}_{\text{KL}}$$
-    
-      
+    $$\mathcal{L}_{\text{batch}} = \frac{1}{B} \sum_{k=1}^{B} \mathcal{L}_k$$
     
 
-#### 2. Sample 1 ($I_1$) Walkthrough
+### 2. Sample 1 ($I_1$) Walkthrough
 
 **Input & Encoder Output:**
 
   
 
-- **Input Vector ($x^{(1)}$)**: $x = [0, 1]$
+- Input Vector ($x^{(1)}$): $x = [0, 1]$
     
       
     
-- **Predicted Distribution Parameters**:
+- Predicted Distribution Parameters:
     
       
-    - $\mu_1 = 0.2, \quad \mu_2 = -0.1$
-        
-          
-        
-    - $\sigma_1 = 0.25, \quad \sigma_2 = 0.5$
-        
-          
-        
+    
+    $$\mu_1 = 0.2, \quad \mu_2 = -0.1$$
+    
+    $$\sigma_1 = 0.25, \quad \sigma_2 = 0.5$$
+    
 
-**Reparameterization Trick (Latent Sampling):** Draw random noise vector $\epsilon = [1.0, -0.8]$:
+**Reparameterization Trick (Latent Sampling):** Draw random noise $\epsilon = [1.0, -0.8]$:
 
   
 
@@ -294,12 +290,12 @@ A Variational Autoencoder maps input data into a parameterized latent distributi
     
       
     
-- **Latent Vector**: $z = [0.45, -0.50]$
+- Latent Vector: $z = [0.45, -0.50]$
     
       
     
 
-**Decoder Pass (Reconstruction):** Pass $z$ through the decoder network to reconstruct the original input:
+**Decoder Pass (Reconstruction):**
 
   
 
@@ -312,62 +308,51 @@ A Variational Autoencoder maps input data into a parameterized latent distributi
 
   
 
-$$\mathcal{L}_{\text{rec}}^{(1)} = \frac{(0 - 0.269)^2 + (1 - 0.622)^2}{2} = \frac{0.0724 + 0.1429}{2} \approx 0.311$$
+$$\mathcal{L}_{\text{rec}}^{(1)} = \frac{(0 - 0.269)^2 + (1 - 0.622)^2}{2} = \frac{0.0724 + 0.1429}{2} = \frac{0.2153}{2} \approx 0.1076$$
+
+**Averaged KL Divergence Loss ($\mathcal{L}_{\text{KL}}^{(1)}$):** Compute dimension-wise components:
 
   
 
-**KL Divergence Loss ($\mathcal{L}_{\text{KL}}^{(1)}$):** Compute dimension-wise divergence against standard normal prior:
-
-  
-
-- **Dimension 1**:
+- **Dimension 1:**
     
       
     
-    $$\text{KL}_{11} = -\frac{1}{2} \left(1 + \ln(0.25^2) - 0.2^2 - 0.25^2\right) \approx 0.9375$$
+    $$\text{KL}_{11} = -\frac{1}{2} \left(1 + \ln(0.25^2) - 0.2^2 - 0.25^2\right) = -\frac{1}{2}(1 - 2.7726 - 0.04 - 0.0625) \approx 0.9375$$
+    
+- **Dimension 2:**
     
       
     
-- **Dimension 2**:
+    $$\text{KL}_{12} = -\frac{1}{2} \left(1 + \ln(0.5^2) - (-0.1)^2 - 0.5^2\right) = -\frac{1}{2}(1 - 1.3863 - 0.01 - 0.25) \approx 0.3231$$
+    
+- **Averaged KL for $I_1$ ($D = 2$):**
     
       
     
-    $$\text{KL}_{12} = -\frac{1}{2} \left(1 + \ln(0.5^2) - (-0.1)^2 - 0.5^2\right) \approx 0.0451$$
-    
-      
-    
-- **Total KL for $I_1$**:
-    
-      
-    
-    $$\mathcal{L}_{\text{KL}}^{(1)} = \text{KL}_{11} + \text{KL}_{12} = 0.9375 + 0.0451 = 0.9826$$
-    
-      
+    $$\mathcal{L}_{\text{KL}}^{(1)} = \frac{\text{KL}_{11} + \text{KL}_{12}}{2} = \frac{0.9375 + 0.3231}{2} = \frac{1.2606}{2} \approx 0.6303$$
     
 
-#### 3. Sample 2 ($I_2$) Walkthrough
+### 3. Sample 2 ($I_2$) Walkthrough
 
 **Input & Encoder Output:**
 
   
 
-- **Input Vector ($x^{(2)}$)**: $x = [1, 0]$
+- Input Vector ($x^{(2)}$): $x = [1, 0]$
     
       
     
-- **Predicted Distribution Parameters**:
+- Predicted Distribution Parameters:
     
       
-    - $\mu_1 = 0.2, \quad \mu_2 = 0.3$
-        
-          
-        
-    - $\sigma_1 = 0.8, \quad \sigma_2 = 0.5$
-        
-          
-        
+    
+    $$\mu_1 = 0.2, \quad \mu_2 = 0.3$$
+    
+    $$\sigma_1 = 0.8, \quad \sigma_2 = 0.5$$
+    
 
-**Reparameterization Trick (Latent Sampling):** Draw random noise vector $\epsilon = [-1.0, 1.0]$:
+**Reparameterization Trick (Latent Sampling):** Draw random noise $\epsilon = [-1.0, 1.0]$:
 
   
 
@@ -379,12 +364,12 @@ $$\mathcal{L}_{\text{rec}}^{(1)} = \frac{(0 - 0.269)^2 + (1 - 0.622)^2}{2} = \fr
     
       
     
-- **Latent Vector**: $z = [-0.60, 0.80]$
+- Latent Vector: $z = [-0.60, 0.80]$
     
       
     
 
-**Decoder Pass (Reconstruction):** Pass $z$ through the decoder network to reconstruct the input:
+**Decoder Pass (Reconstruction):**
 
   
 
@@ -397,70 +382,64 @@ $$\mathcal{L}_{\text{rec}}^{(1)} = \frac{(0 - 0.269)^2 + (1 - 0.622)^2}{2} = \fr
 
   
 
-$$\mathcal{L}_{\text{rec}}^{(2)} = \frac{(1 - 0.775)^2 + (0 - 0.378)^2}{2} = \frac{0.0506 + 0.1429}{2} \approx 0.161$$
+$$\mathcal{L}_{\text{rec}}^{(2)} = \frac{(1 - 0.775)^2 + (0 - 0.378)^2}{2} = \frac{0.0506 + 0.1429}{2} = \frac{0.1935}{2} \approx 0.0968$$
+
+**Averaged KL Divergence Loss ($\mathcal{L}_{\text{KL}}^{(2)}$):** Compute dimension-wise components:
 
   
 
-**KL Divergence Loss ($\mathcal{L}_{\text{KL}}^{(2)}$):** Compute dimension-wise divergence against standard normal prior:
+- **Dimension 1:**
+    
+      
+    
+    $$\text{KL}_{21} = -\frac{1}{2} \left(1 + \ln(0.8^2) - 0.2^2 - 0.8^2\right) = -\frac{1}{2}(1 - 0.4463 - 0.04 - 0.64) \approx 0.0631$$
+    
+- **Dimension 2:**
+    
+      
+    
+    $$\text{KL}_{22} = -\frac{1}{2} \left(1 + \ln(0.5^2) - 0.3^2 - 0.5^2\right) = -\frac{1}{2}(1 - 1.3863 - 0.09 - 0.25) \approx 0.3631$$
+    
+- **Averaged KL for $I_2$ ($D = 2$):**
+    
+      
+    
+    $$\mathcal{L}_{\text{KL}}^{(2)} = \frac{\text{KL}_{21} + \text{KL}_{22}}{2} = \frac{0.0631 + 0.3631}{2} = \frac{0.4262}{2} \approx 0.2131$$
+    
+
+### 4. Total Loss Calculation (Weighted by $\beta = 0.5$)
+
+Combining reconstruction loss and averaged latent regularizations:
 
   
 
-- **Dimension 1**:
+- **Total Loss for Sample 1 ($I_1$):**
     
       
     
-    $$\text{KL}_{21} = -\frac{1}{2} \left(1 + \ln(0.8^2) - 0.2^2 - 0.8^2\right) \approx 0.0631$$
+    $$\mathcal{L}_1 = \mathcal{L}_{\text{rec}}^{(1)} + \beta \mathcal{L}_{\text{KL}}^{(1)} = 0.1076 + 0.5(0.6303) = 0.1076 + 0.3152 = 0.4228$$
+    
+- **Total Loss for Sample 2 ($I_2$):**
     
       
     
-- **Dimension 2**:
+    $$\mathcal{L}_2 = \mathcal{L}_{\text{rec}}^{(2)} + \beta \mathcal{L}_{\text{KL}}^{(2)} = 0.0968 + 0.5(0.2131) = 0.0968 + 0.1066 = 0.2034$$
+    
+- **Batch Average Total Loss:**
     
       
     
-    $$\text{KL}_{22} = -\frac{1}{2} \left(1 + \ln(0.5^2) - 0.3^2 - 0.5^2\right) \approx 0.3630$$
-    
-      
-    
-- **Total KL for $I_2$**:
-    
-      
-    
-    $$\mathcal{L}_{\text{KL}}^{(2)} = \text{KL}_{21} + \text{KL}_{22} = 0.0631 + 0.3630 = 0.4261$$
-    
-      
+    $$\mathcal{L}_{\text{batch}} = \frac{\mathcal{L}_1 + \mathcal{L}_2}{2} = \frac{0.4228 + 0.2034}{2} \approx 0.3131$$
     
 
-#### 4. Total Loss Calculation (Weighted by $\beta$)
+### 5. Image Generation via Decoder Sampling
 
-Combining reconstruction and regularized latent distribution penalties with regularization weight $\beta$:
+To generate a completely novel sample, bypass the encoder entirely:
 
   
 
-- **Total Loss for Sample 1 ($I_1$)** (with $\beta = 0.5$):
+1. Sample a point directly from the standard normal latent prior: $z_{\text{gen}} \sim \mathcal{N}(0, I_2)$.
     
       
     
-    $$\mathcal{L}_1 = \mathcal{L}_{\text{rec}}^{(1)} + \beta \mathcal{L}_{\text{KL}}^{(1)} = 0.311 + 0.5(0.9826) = 0.311 + 0.4913 \approx 0.7545$$
-    
-      
-    
-- **Total Loss for Sample 2 ($I_2$)** (with $\beta = 0.5$):
-    
-      
-    
-    $$\mathcal{L}_2 = \mathcal{L}_{\text{rec}}^{(2)} + \beta \mathcal{L}_{\text{KL}}^{(2)} = 0.161 + 0.5(0.4261) = 0.161 + 0.21305 \approx 0.3741$$
-    
-      
-    
-
-#### 5. Image Generation via Decoder Sampling
-
-To generate a completely novel image, bypass the encoder entirely:
-
-  
-
-1. Sample a random point directly from the standard normal latent prior: $z_{\text{gen}} \sim \mathcal{N}(0, I)$
-    
-      
-    
-2. Pass $z_{\text{gen}}$ into the decoder network $g(z)$ to synthesize a new output image $\hat{x}_{\text{gen}}$
+2. Pass $z_{\text{gen}}$ into the decoder network $g(z)$ to synthesize a new output vector $\hat{x}_{\text{gen}}$.

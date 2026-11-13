@@ -28,7 +28,8 @@
 	- [x] Lecture 1 - Introduction
 	- [x] Lecture 2 - Autoregressive Models
 	- [x] Lecture 3 - Autoencoders and VAEs
-	- [ ] Lecture 4 - GANs
+	- [x] Lecture 4 - GANs
+	- [x] Lecture 5 - BiGANs, Conditional GANs
 
 - [ ] [[4th Year/1st Term/Robotics/Home\|Robotics]]
 	- [x] Lecture 1 - Introduction
@@ -45,6 +46,7 @@
 	- [ ] Lecture 3 - Uncertainty in data (Cont.), Bayes' Theorem, Probabilistic models using MLEs
 	- [ ] Lecture 4 - Behind Logistic Regression, and Why Deep Learning 
 	- [ ] Lecture 5 - Dimensionality Reduction, PCA, Autoencoders
+	- [ ] Lecture 6 - Clustering
 
 - [x] [[4th Year/1st Term/BCI/Home\|BCI]]
 	- [x] Lecture 1 - Introduction
@@ -52,9 +54,10 @@
 	- [x] Lecture 3 - Cosine and sine, EGG and Wave Slicing (mostly if not entirely code)
 	- [x] Lecture 4 - Fourier Transform
 	- [ ] Lecture 5 - Signal Filtering
+	- [ ] Lecture 6 - Signal Classification
 
-- [ ] [[4th Year/1st Term/Selected Topics/Home\|Selected Topics in AI]]
-	- [ ] Lecture 1 - Introduction to CNNs
-	- [ ] Lecture 2 - ResNet 
-	- [ ] Lecture 3 - DenseNet
-	- [ ] Lecture 4 - MobileNet
+- [x] [[4th Year/1st Term/Selected Topics/Home\|Selected Topics in AI]]
+	- [x] Lecture 1 - Introduction to CNNs
+	- [x] Lecture 2 - ResNet 
+	- [x] Lecture 3 - DenseNet
+	- [x] Lecture 4 - MobileNet
