@@ -482,6 +482,7 @@ When dealing with complex, high-dimensional domains, a single hidden layer is of
         
     - **Stage 4:** Freeze Encoders 1, 2, and 3 ($x \rightarrow a^1 \rightarrow a^2 \rightarrow a^3$), attach Hidden Layer 4 ($a^4$) and a temporary decoder, and train unsupervised to learn the **feature extractor for the third feature extractor**.
    <br>
+   ![Pasted image 20261113195021.png](/img/user/imgs/Pasted%20image%2020261113195021.png)
 - **Downstream Task Integration (Supervised Classification Head):**
     
       
@@ -495,6 +496,8 @@ When dealing with complex, high-dimensional domains, a single hidden layer is of
         
     - Train **only the final classification layer weights** in a **supervised** manner using labeled data, learning to classify the input data by leveraging the rich, high-level features $a^4$ already extracted by the frozen hierarchy.
   <br>
+  ![Pasted image 20261113194956.png](/img/user/imgs/Pasted%20image%2020261113194956.png)
+  
 - **Global Fine-Tuning (End-to-End Supervised Optimization):**
     
       
