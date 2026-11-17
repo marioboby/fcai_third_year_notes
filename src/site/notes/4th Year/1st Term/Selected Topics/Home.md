@@ -10,7 +10,7 @@
 [[4th Year/1st Term/Selected Topics/Before Mid/Lecture 2 - Intro to ResNet\|Lecture 2 - Intro to ResNet]]
 [[4th Year/1st Term/Selected Topics/Before Mid/Lecture 3 - DenseNet\|Lecture 3 - DenseNet]]
 [[4th Year/1st Term/Selected Topics/Before Mid/Lecture 4 - MobileNet\|Lecture 4 - MobileNet]]
-
+[[4th Year/1st Term/Selected Topics/Before Mid/Zatona Before Mid\|Zatona Before Mid]]
 
 ---
 ## After Mid
@@ -22,4 +22,4 @@
 [[4th Year/1st Term/Selected Topics/Numerical Examples/2 - ResNet\|2 - ResNet]]
 [[4th Year/1st Term/Selected Topics/Numerical Examples/3 - DenseNet\|3 - DenseNet]]
 [[4th Year/1st Term/Selected Topics/Numerical Examples/4 - MobileNet\|4 - MobileNet]]
-[[4th Year/1st Term/Selected Topics/Before Mid/Zatona Before Mid\|Zatona Before Mid]]
+[[4th Year/1st Term/Selected Topics/Numerical Examples/زتونة المسائل\|زتونة المسائل]]
