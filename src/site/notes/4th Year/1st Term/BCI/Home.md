@@ -10,7 +10,8 @@
 [[4th Year/1st Term/BCI/Before Mid/Lecture 2 - Montage, Referencing, EEG input formatting\|Lecture 2 - Montage, Referencing, EEG input formatting]]
 [[4th Year/1st Term/BCI/Before Mid/Lecture 3 - EGG input formatting code example\|Lecture 3 - Cosine and sine, EEG and Wave Slicing (mostly if not entirely code)]]
 [[4th Year/1st Term/BCI/Before Mid/Lecture 4 - Fourier Transform\|Lecture 4 - Fourier Transform]]
-
+[[4th Year/1st Term/BCI/Before Mid/Lecture 5 - Signal Filtering\|Lecture 5 - Signal Filtering]]
+[[4th Year/1st Term/BCI/Before Mid/Lecture 6 - Signal Classification\|Lecture 6 - Signal Classification]]
 
 
 ---

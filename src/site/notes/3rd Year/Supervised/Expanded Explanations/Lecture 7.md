@@ -262,6 +262,8 @@ In standard networks, as this error signal passes backward through dozens or hun
 
 Skip connections act as an unobstructed superhighway for these error signals. Because the addition operation ($F(x) + x$) simply distributes the gradient equally when flowing backward, the error signal can bypass the complex convolutional layers and flow directly back to the earlier parts of the network at full strength. This is what allows ResNets to be hundreds, or even thousands, of layers deep without the training process collapsing.
 
+---
+
 To understand these two mechanisms, we have to look closely at the underlying mathematics of how neural networks learn: the **Loss Function** and the **Chain Rule of Calculus**.
 
 Networks do not make conscious "decisions," nor do they know in advance which layers are useful. Everything is driven by the mathematical optimization process called Gradient Descent.
